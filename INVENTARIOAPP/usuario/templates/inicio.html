@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Página de Inicio</title>
+</head>
+<body>
+    <h1>Bienvenido {{ user.username }}</h1>
+    <p>Rol actual: <strong>{{ rol }}</strong></p>
+
+    {% if rol == "Administrador" %}
+        <p>Acceso completo al sistema.</p>
+        <a href="/admin/">Ir al panel de administración</a>
+
+    {% elif rol == "Responsable de área" %}
+        <p>Solo puedes ver los productos asignados a tu área.</p>
+
+    {% elif rol == "Invitado" %}
+        <p>Tienes acceso limitado de solo lectura.</p>
+
+    {% else %}
+        <p>Tu rol no tiene permisos asignados.</p>
+    {% endif %}
+
+    <br>
+    <a href="{% url 'logout' %}">Cerrar sesión</a>
+</body>
+</html>
