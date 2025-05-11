@@ -14,6 +14,7 @@
     {% elif rol == "Encargado" %}
         <p>Puedes registrar productos en el inventario.</p>
         <a href="{% url 'registrar_producto' %}">Registrar producto</a>
+        <a href="{% url 'vista_lectura' %}">Ver listado de artículos</a><br>
 
     {% elif rol == "Responsable de área" %}
         <p>Solo puedes ver los productos asignados a tu área.</p>
