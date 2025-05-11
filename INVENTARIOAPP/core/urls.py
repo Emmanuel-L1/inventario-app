@@ -19,10 +19,13 @@ from django.urls import path, include
 from usuario.views import InicioSesionView
 from django.contrib.auth.views import LogoutView
 from usuario.views import inicio
+from inventario.views import registrar_producto
+
 
 urlpatterns = [
     path('', inicio, name='inicio'),
     path('admin/', admin.site.urls),
     path('login/', InicioSesionView.as_view(), name='login'),
     path('logout/', LogoutView.as_view(next_page='login'), name='logout'),
+    path('registrar/', registrar_producto, name='registrar_producto'),
 ]
