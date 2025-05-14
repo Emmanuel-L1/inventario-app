@@ -1,7 +1,138 @@
-<h2>Registro inventario</h2>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Registrar</button>
-</form>
-<a href="{% url 'inicio' %}">Menú principal</a>
+{% extends 'base.html' %}
+
+{% block title %}Registro de Inventario | InventarioAPP{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Contenedor principal con sombra y transición */
+    .form-container {
+        background-color: #FFFFFF;
+        border-radius: 12px;
+        padding: 2.5rem;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        transition: all 0.3s ease;
+    }
+    
+    .form-container:hover {
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Estilo mejorado para los campos del formulario */
+    .form-control {
+        background-color: #F8F9FA;
+        border: 1px solid #E0E0E0;
+        border-radius: 8px;
+        padding: 12px 15px;
+        transition: all 0.3s;
+        font-size: 0.95rem;
+    }
+    
+    .form-control:focus {
+        border-color: #588BBA;
+        box-shadow: 0 0 0 0.25rem rgba(88, 139, 186, 0.25);
+        background-color: #FFFFFF;
+    }
+
+    /* Estilo para las etiquetas */
+    form p label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+        color: #495057;
+    }
+
+    /* Contenedor de cada campo */
+    form p {
+        margin-bottom: 1.5rem;
+    }
+
+    /* Botón principal */
+    .btn-custom-blue {
+        background-color: #588BBA;
+        color: #FFFFFF;
+        border: none;
+        border-radius: 8px;
+        padding: 12px 30px;
+        font-weight: 500;
+        letter-spacing: 0.5px;
+        transition: all 0.3s;
+        box-shadow: 0 4px 6px rgba(88, 139, 186, 0.2);
+    }
+    
+    .btn-custom-blue:hover {
+        background-color: #48709A;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 8px rgba(88, 139, 186, 0.3);
+    }
+    
+    .btn-custom-blue:active {
+        transform: translateY(0);
+    }
+
+    /* Botón secundario */
+    .btn-link-blue {
+        background-color: transparent;
+        color: #588BBA;
+        border: 2px solid #588BBA;
+        border-radius: 8px;
+        padding: 10px 25px;
+        text-decoration: none;
+        display: inline-block;
+        font-weight: 500;
+        transition: all 0.3s;
+    }
+    
+    .btn-link-blue:hover {
+        background-color: #588BBA;
+        color: #FFFFFF;
+        text-decoration: none;
+    }
+
+    /* Título del formulario */
+    .form-title {
+        color: #588BBA;
+        margin-bottom: 2rem;
+        font-weight: 600;
+        position: relative;
+        padding-bottom: 0.5rem;
+    }
+    
+    .form-title:after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        bottom: 0;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 3px;
+        background: #588BBA;
+        border-radius: 3px;
+    }
+
+    /* Espaciado y alineación */
+    .button-group {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-top: 2rem;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center my-5">
+    <div class="col-md-8 col-lg-6">
+        <div class="form-container">
+            <h2 class="form-title text-center">Registro de Inventario</h2>
+            <form method="post" class="needs-validation" novalidate>
+                {% csrf_token %}
+                {{ form.as_p }}
+                <div class="button-group">
+                    <button type="submit" class="btn btn-custom-blue">Registrar</button>
+                    <a href="{% url 'inicio' %}" class="btn btn-link-blue">Menú principal</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
