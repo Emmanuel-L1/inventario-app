@@ -1,45 +1,91 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Iniciar sesión</title>
-    <style>
-        body { font-family: Arial; background-color: #f2f2f2; }
-        .login-container {
-            width: 300px;
-            margin: 100px auto;
-            padding: 30px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px gray;
-        }
-        h2 { text-align: center; }
-        input[type="text"], input[type="password"] {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-        }
-        button {
-            width: 100%;
-            padding: 10px;
-            background-color: steelblue;
-            color: white;
-            border: none;
-            border-radius: 5px;
-        }
-    </style>
-</head>
-<body>
-    <div class="login-container">
-        <h2>Iniciar sesión</h2>
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">Entrar</button>
-        </form>
-        {% if form.errors %}
-            <p style="color: red; text-align: center;">Usuario o contraseña incorrectos.</p>
-        {% endif %}
+{% extends 'base.html' %}
+
+{% block title %}Iniciar sesión | InventarioAPP{% endblock %}
+
+{% block extra_css %}
+<style>
+    .card-custom-bg {
+        background-color: #588BBA; 
+    }
+    .form-control-custom {
+        border-radius: 2rem; 
+    }
+    .btn-custom {
+        border-radius: 2rem; 
+    }
+    .text-accessible {
+        color: #000000; 
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+        <div class="card shadow-lg border-0 card-custom-bg">
+            <div class="card-body p-5">
+                <!-- Título -->
+                <div class="text-center mb-5">
+                    <h2 class="h4 mb-4 text-white">Acceso al sistema</h2>
+                </div>
+
+                <!-- Formulario de login -->
+                <form method="post" class="needs-validation" novalidate>
+                    {% csrf_token %}
+                    
+                    <!-- Campo Usuario -->
+                    <div class="mb-4">
+                        <label for="id_username" class="form-label fw-bold text-white">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill me-1" viewBox="0 0 16 16">
+                                <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                            </svg>
+                            Usuario
+                        </label>
+                        <input type="text" name="username" id="id_username" 
+                               class="form-control form-control-lg form-control-custom {% if form.errors %}is-invalid{% endif %}" 
+                               placeholder="Ingrese su usuario" required
+                               aria-describedby="usernameHelp">
+                        <div id="usernameHelp" class="form-text text-accessible">Ingrese su nombre de usuario registrado</div>
+                    </div>
+                    
+                    <!-- Campo Contraseña -->
+                    <div class="mb-4">
+                        <label for="id_password" class="form-label fw-bold text-white">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lock-fill me-1" viewBox="0 0 16 16">
+                                <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2m3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2"/>
+                            </svg>
+                            Contraseña
+                        </label>
+                        <input type="password" name="password" id="id_password" 
+                               class="form-control form-control-lg form-control-custom {% if form.errors %}is-invalid{% endif %}" 
+                               placeholder="Ingrese su contraseña" required
+                               aria-describedby="passwordHelp">
+                        <div id="passwordHelp" class="form-text text-accessible">Mínimo 8 caracteres</div>
+                    </div>
+                    
+                    <!-- Mensajes de error -->
+                    {% if form.errors %}
+                    <div class="alert alert-danger d-flex align-items-center" role="alert">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16">
+                            <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5m.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
+                        </svg>
+                        <div>
+                            Usuario o contraseña incorrectos. Intente nuevamente.
+                        </div>
+                    </div>
+                    {% endif %}
+                    
+                    <!-- Botón de submit -->
+                    <button type="submit" class="btn btn-secondary btn-lg w-100 py-3 mb-3 btn-custom">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-in-right me-2" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 1 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0z"/>
+                            <path fill-rule="evenodd" d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"/>
+                        </svg>
+                        Iniciar sesión
+                    </button>
+                </form>
+            </div>
+        </div>
     </div>
-</body>
-</html>
+</div>
+{% endblock %}
