@@ -15,14 +15,13 @@
 
     <form method="get" class="row g-3 mb-4">
         <div class="col-md-3">
-            <select name="area" class="form-select">
-                <option value="0">Todas las categorías</option>
-                {% for area in areas %}
-                    <option value="{{ area.id }}" {% if selected_area == area.id|stringformat:"s" %}selected{% endif %}>
-                        {{ area.nombre }}
-                    </option>
+            <select name="edificio" class="form-select">
+            <option value="">Todos los edificios</option>
+                {% for edificio in edificios %}
+                    <option value="{{ edificio }}">{{ edificio }}</option>
                 {% endfor %}
             </select>
+
         </div>
 
         <div class="col-md-3">
@@ -37,7 +36,7 @@
         </div>
 
         <div class="col-md-4">
-            <input type="text" name="q" value="{{ query }}" class="form-control" placeholder="Buscar por nombre o descripción">
+            <input type="text" name="q" class="form-control" placeholder="Buscar..." value="{{ query|default_if_none:'' }}">
         </div>
 
         <div class="col-md-2">
@@ -50,7 +49,7 @@
             <tr>
                 <th>Nombre</th>
                 <th>Descripción</th>
-                <th>Área</th>
+                <th>Edificio</th>
                 <th>Responsable</th>
                 <th>Acciones</th>
             </tr>
@@ -60,7 +59,7 @@
                 <tr>
                     <td>{{ producto.nombre }}</td>
                     <td>{{ producto.descripcion }}</td>
-                    <td>{{ producto.area.nombre }}</td>
+                    <td>{{ producto.edificio }}</td>
                     <td>{{ producto.responsable.username }}</td>
                     <td>
                         <a href="{% url 'editar_producto' producto.id %}" class="btn btn-sm btn-success">Editar</a>

@@ -33,12 +33,13 @@ def lista_productos(request):
     productos = Producto.objects.all()
 
     # Obtener parámetros del filtro
-    area_id = request.GET.get('area')
+    
     responsable_id = request.GET.get('responsable')
-    query = request.GET.get('q')
+    query = request.GET.get('q') or ''
 
-    if area_id and area_id != '0':
-        productos = productos.filter(area_id=area_id)
+    edificio = request.GET.get('edificio')
+    if edificio:
+        productos = productos.filter(edificio=edificio)
 
     if responsable_id and responsable_id != '0':
         productos = productos.filter(responsable_id=responsable_id)
@@ -48,17 +49,19 @@ def lista_productos(request):
             Q(nombre__icontains=query) | Q(descripcion__icontains=query)
         )
 
-    areas = Area.objects.all()
     responsables = User.objects.all()
+    edificios = Producto.objects.values_list('edificio', flat=True).distinct()
+
 
     return render(request, 'inventario/lista_productos.html', {
-        'productos': productos,
-        'areas': areas,
-        'responsables': responsables,
-        'selected_area': area_id,
-        'selected_responsable': responsable_id,
-        'query': query,
-    })
+    'productos': productos,
+    'responsables': responsables,
+    'selected_responsable': responsable_id,
+    'query': query,
+    'edificios': edificios,
+    'selected_edificio': edificio,
+})
+
 
 @login_required
 def editar_producto(request, producto_id):
@@ -81,37 +84,35 @@ def eliminar_producto(request, producto_id):
 
 @login_required
 def vista_solo_lectura(request):
-    perfil = getattr(request.user, 'perfil', None)
-    rol = perfil.rol.nombre if perfil and perfil.rol else None
+    productos = Producto.objects.filter(is_active=True).order_by('nombre')
 
-    if rol not in ['Invitado', 'Responsable de área', 'Encargado']:
-        return render(request, 'inventario/no_autorizado.html')
+    edificio = request.GET.get('edificio') or ''
+    responsable_id = request.GET.get('responsable') or ''
+    query = request.GET.get('q') or ''
 
-    productos = Producto.objects.all()
+    if edificio:
+        productos = productos.filter(edificio=edificio)
 
-    area_id = request.GET.get('area')
-    responsable_id = request.GET.get('responsable')
-    query = request.GET.get('q')
-
-    if area_id and area_id != '0':
-        productos = productos.filter(area_id=area_id)
     if responsable_id and responsable_id != '0':
         productos = productos.filter(responsable_id=responsable_id)
+
     if query:
-        productos = productos.filter(Q(nombre__icontains=query) | Q(descripcion__icontains=query))
+        productos = productos.filter(
+            Q(nombre__icontains=query) | Q(descripcion__icontains=query)
+        )
+
+    edificios = Producto.objects.values_list('edificio', flat=True).distinct()
+    responsables = User.objects.all()
 
     paginator = Paginator(productos, 5)
     page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
-
-    areas = Area.objects.all()
-    responsables = User.objects.all()
+    productos_paginados = paginator.get_page(page_number)
 
     return render(request, 'inventario/lista_lectura.html', {
-        'page_obj': page_obj,
-        'areas': areas,
+        'productos': productos_paginados,
+        'edificios': edificios,
         'responsables': responsables,
-        'selected_area': area_id,
+        'selected_edificio': edificio,
         'selected_responsable': responsable_id,
         'query': query,
     })
