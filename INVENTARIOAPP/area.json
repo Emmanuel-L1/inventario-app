@@ -1,0 +1,42 @@
+[
+    {
+        "model": "inventario.area",
+        "pk": 1,
+        "fields": {
+            "nombre": "Laboratorio de Informática",
+            "descripcion": "Área destinada para el uso de computadoras y equipos tecnológicos."
+        }
+    },
+    {
+        "model": "inventario.area",
+        "pk": 2,
+        "fields": {
+            "nombre": "Biblioteca",
+            "descripcion": "Área destinada para el estudio y consulta de libros y recursos digitales."
+        }
+    },
+    {
+        "model": "inventario.area",
+        "pk": 3,
+        "fields": {
+            "nombre": "Aula de Clases",
+            "descripcion": "Área destinada para clases presenciales."
+        }
+    },
+    {
+        "model": "inventario.area",
+        "pk": 4,
+        "fields": {
+            "nombre": "Sala de Conferencias",
+            "descripcion": "Área destinada para eventos y conferencias."
+        }
+    },
+    {
+        "model": "inventario.area",
+        "pk": 5,
+        "fields": {
+            "nombre": "Área Administrativa",
+            "descripcion": "Área destinada para el personal administrativo y de gestión."
+        }
+    }
+]

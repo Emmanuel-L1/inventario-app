@@ -1,0 +1,189 @@
+[
+  {
+    "model": "inventario.area",
+    "pk": 1,
+    "fields": {
+      "nombre": "Informática",
+      "descripcion": "Área de equipos de cómputo y redes"
+    }
+  },
+  {
+    "model": "inventario.area",
+    "pk": 2,
+    "fields": {
+      "nombre": "Administración",
+      "descripcion": "Área de mobiliario y papelería"
+    }
+  },
+  {
+    "model": "inventario.area",
+    "pk": 3,
+    "fields": {
+      "nombre": "Mecatrónica",
+      "descripcion": "Área de automatización y control"
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 1,
+    "fields": {
+      "username": "admin",
+      "password": "pbkdf2_sha256$260000$demo$hashedpassword",
+      "is_superuser": true,
+      "is_staff": true,
+      "is_active": true
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 2,
+    "fields": {
+      "username": "usuario1",
+      "password": "pbkdf2_sha256$260000$demo$hashedpassword",
+      "is_superuser": false,
+      "is_staff": false,
+      "is_active": true
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 3,
+    "fields": {
+      "username": "usuario2",
+      "password": "pbkdf2_sha256$260000$demo$hashedpassword",
+      "is_superuser": false,
+      "is_staff": false,
+      "is_active": true
+    }
+  },
+  {
+    "model": "inventario.producto",
+    "pk": 1,
+    "fields": {
+      "nombre": "Laptop HP",
+      "descripcion": "Laptop para laboratorio",
+      "costo": "15000.00",
+      "año": 2022,
+      "numero_inventario": "INF001",
+      "area": 1,
+      "responsable": 1
+    }
+  },
+  {
+    "model": "inventario.producto",
+    "pk": 2,
+    "fields": {
+      "nombre": "Proyector Epson",
+      "descripcion": "Proyector para presentaciones",
+      "costo": "8000.00",
+      "año": 2021,
+      "numero_inventario": "INF002",
+      "area": 1,
+      "responsable": 2
+    }
+  },
+  {
+    "model": "inventario.producto",
+    "pk": 3,
+    "fields": {
+      "nombre": "Escritorio gerencial",
+      "descripcion": "Mueble de oficina",
+      "costo": "2500.00",
+      "año": 2020,
+      "numero_inventario": "ADM001",
+      "area": 2,
+      "responsable": 2
+    }
+  },
+  {
+    "model": "inventario.producto",
+    "pk": 4,
+    "fields": {
+      "nombre": "Silla ejecutiva",
+      "descripcion": "Silla ergonómica",
+      "costo": "1500.00",
+      "año": 2020,
+      "numero_inventario": "ADM002",
+      "area": 2,
+      "responsable": 3
+    }
+  },
+  {
+    "model": "inventario.producto",
+    "pk": 5,
+    "fields": {
+      "nombre": "PLC Siemens",
+      "descripcion": "Controlador lógico programable",
+      "costo": "12000.00",
+      "año": 2023,
+      "numero_inventario": "MEC001",
+      "area": 3,
+      "responsable": 1
+    }
+  },
+  {
+    "model": "inventario.producto",
+    "pk": 6,
+    "fields": {
+      "nombre": "Multímetro digital",
+      "descripcion": "Medición de voltaje y corriente",
+      "costo": "900.00",
+      "año": 2023,
+      "numero_inventario": "MEC002",
+      "area": 3,
+      "responsable": 2
+    }
+  },
+  {
+    "model": "inventario.producto",
+    "pk": 7,
+    "fields": {
+      "nombre": "Router Cisco",
+      "descripcion": "Dispositivo de red",
+      "costo": "5000.00",
+      "año": 2022,
+      "numero_inventario": "INF003",
+      "area": 1,
+      "responsable": 3
+    }
+  },
+  {
+    "model": "inventario.producto",
+    "pk": 8,
+    "fields": {
+      "nombre": "Impresora láser",
+      "descripcion": "Impresión de documentos",
+      "costo": "2500.00",
+      "año": 2021,
+      "numero_inventario": "ADM003",
+      "area": 2,
+      "responsable": 1
+    }
+  },
+  {
+    "model": "inventario.producto",
+    "pk": 9,
+    "fields": {
+      "nombre": "Sensor ultrasónico",
+      "descripcion": "Sensor de distancia",
+      "costo": "350.00",
+      "año": 2024,
+      "numero_inventario": "MEC003",
+      "area": 3,
+      "responsable": 3
+    }
+  },
+  {
+    "model": "inventario.producto",
+    "pk": 10,
+    "fields": {
+      "nombre": "Switch TP-Link",
+      "descripcion": "Conmutador de red",
+      "costo": "700.00",
+      "año": 2024,
+      "numero_inventario": "INF004",
+      "area": 1,
+      "responsable": 1
+    }
+  }
+]
