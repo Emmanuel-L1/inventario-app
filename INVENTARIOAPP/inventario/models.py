@@ -21,6 +21,7 @@ class Producto(models.Model):
     aula = models.CharField(max_length=100)
     responsable = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     is_active = models.BooleanField(default=True)
+    imagen = models.ImageField(upload_to='productos/', null=True, blank=True)
 
     objects = ProductoManager()
 

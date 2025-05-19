@@ -17,7 +17,7 @@ def registrar_producto(request):
         return render(request, 'inventario/no_autorizado.html')
 
     if request.method == 'POST':
-        form = ProductoForm(request.POST)
+        form = ProductoForm(request.POST, request.FILES)
         if form.is_valid():
             producto = form.save(commit=False)
             producto.responsable = request.user
@@ -66,7 +66,7 @@ def lista_productos(request):
 @login_required
 def editar_producto(request, producto_id):
     producto = get_object_or_404(Producto, id=producto_id)
-    form = ProductoForm(request.POST or None, instance=producto)
+    form = ProductoForm(request.POST or None, request.FILES or None, instance=producto)
     if request.method == 'POST' and form.is_valid():
         form.save()
         messages.success(request, "Producto actualizado correctamente.")

@@ -1,0 +1,15 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.card {
+    border-radius: 1rem;
+}
+
+.btn-danger {
+    min-width: 120px;
+}
+
+.btn-secondary {
+    min-width: 120px;
+}
