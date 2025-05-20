@@ -7,6 +7,9 @@ from django.shortcuts import get_object_or_404
 from django.contrib import messages
 from django.db.models import Q
 from django.core.paginator import Paginator
+from django.http import HttpResponse
+from django.template.loader import get_template
+from xhtml2pdf import pisa
 
 
 @login_required
@@ -121,3 +124,20 @@ def vista_solo_lectura(request):
 def detalle_producto(request, producto_id):
     producto = get_object_or_404(Producto, id=producto_id)
     return render(request, 'inventario/detalle_producto.html', {'producto': producto})
+
+def generar_pdf_inventario(request):
+    productos = Producto.objects.all()
+    template_path = 'inventario/reporte.html'
+    context = {'productos': productos}
+    
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="reporte_inventario.pdf"'
+    
+    template = get_template(template_path)
+    html = template.render(context)
+    
+    pisa_status = pisa.CreatePDF(html, dest=response)
+    
+    if pisa_status.err:
+        return HttpResponse('Ocurrió un error al generar el PDF: %s' % pisa_status.err)
+    return response
