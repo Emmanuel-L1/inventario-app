@@ -92,7 +92,21 @@
         </ul>
     </nav>
 
-    <a href="{% url 'reporte_inventario_pdf' %}" target="_blank">📄 Descargar PDF del Inventario</a>
-    <a href="{% url 'inicio' %}" class="btn btn-secondary mt-3">Menú principal</a>
+    <div class="d-flex justify-content-between align-items-center mt-4">
+    <!-- Botón PDF -->
+    <a href="{% url 'reporte_inventario_pdf' %}" class="btn btn-outline-danger d-inline-flex align-items-center">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-file-earmark-pdf me-2" viewBox="0 0 16 16">
+          <path d="M5.5 6.5A.5.5 0 0 0 5 7v2a.5.5 0 0 0 1 0V8.5h.5A1.5 1.5 0 0 0 8 7v-.5A1.5 1.5 0 0 0 6.5 5h-1a.5.5 0 0 0-.5.5v1zM6.5 6A.5.5 0 0 1 7 6.5V7A.5.5 0 0 1 6.5 7.5H6V6h.5z"/>
+          <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zm-3-.5V1.5L13.5 4H11a1 1 0 0 1-1-1z"/>
+        </svg>
+        Descargar PDF del Inventario
+    </a>
+
+    <!-- Botón Menú principal -->
+    <a href="{% url 'inicio' %}" class="btn btn-secondary">
+        Menú principal
+    </a>
+</div>
+
 </body>
 </html>
