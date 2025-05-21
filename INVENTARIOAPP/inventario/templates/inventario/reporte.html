@@ -21,6 +21,7 @@
                 <th>Año</th>
                 <th>Inventario</th>
                 <th>Responsable</th>
+                <th>Imagen</th>
             </tr>
         </thead>
         <tbody>
@@ -32,6 +33,13 @@
                 <td>{{ producto.año }}</td>
                 <td>{{ producto.numero_inventario }}</td>
                 <td>{{ producto.responsable }}</td>
+                <td>
+                    {% if producto.imagen %}
+                        <img src="{{ producto.imagen.url|safe }}" width="60" height="60">
+                    {% else %}
+                        Sin imagen
+                    {% endif %}
+                </td>
             </tr>
             {% endfor %}
         </tbody>

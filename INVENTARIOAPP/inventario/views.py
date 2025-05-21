@@ -10,6 +10,8 @@ from django.core.paginator import Paginator
 from django.http import HttpResponse
 from django.template.loader import get_template
 from xhtml2pdf import pisa
+from django.conf import settings
+import os
 
 
 @login_required
@@ -125,6 +127,12 @@ def detalle_producto(request, producto_id):
     producto = get_object_or_404(Producto, id=producto_id)
     return render(request, 'inventario/detalle_producto.html', {'producto': producto})
 
+def link_callback(uri, rel):
+    if uri.startswith(settings.MEDIA_URL):
+        path = os.path.join(settings.MEDIA_ROOT, uri.replace(settings.MEDIA_URL, ""))
+        return path
+    return uri
+
 def generar_pdf_inventario(request):
     productos = Producto.objects.all()
     template_path = 'inventario/reporte.html'
@@ -136,7 +144,7 @@ def generar_pdf_inventario(request):
     template = get_template(template_path)
     html = template.render(context)
     
-    pisa_status = pisa.CreatePDF(html, dest=response)
+    pisa_status = pisa.CreatePDF(html, dest=response, link_callback=link_callback)
     
     if pisa_status.err:
         return HttpResponse('Ocurrió un error al generar el PDF: %s' % pisa_status.err)
